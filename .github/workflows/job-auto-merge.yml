@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Auto merge
-        if: ${{ steps.dependabot-metadata.outputs.update-type }} == ${(${APPROVE_UPDATE_TYPE//,/})[0]} || ${{ steps.dependabot-metadata.outputs.update-type }} == ${(${APPROVE_UPDATE_TYPE//,/})[1]} || ${{ steps.metadata.outputs.update-type }} == ${(${APPROVE_UPDATE_TYPE//,/})[2]}
+        if: ${{ steps.dependabot-metadata.outputs.update-type }} == ${(${APPROVE_UPDATE_TYPE//,/})[0]} || ${{ steps.dependabot-metadata.outputs.update-type }} == ${(${APPROVE_UPDATE_TYPE//,/})[1]} || ${{ steps.dependabot-metadata.outputs.update-type }} == ${(${APPROVE_UPDATE_TYPE//,/})[2]}
         run: |
           APPROVE_TYPES=(${APPROVE_UPDATE_TYPES//,/ })
           for TYPE in ${APPROVE_TYPES[@]}; do
