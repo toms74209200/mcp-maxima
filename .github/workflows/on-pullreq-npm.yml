@@ -1,0 +1,23 @@
+name: On Pull Request(NPM)
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '*.json'
+      - '*.ts'
+      - '.github/workflows/on-pullreq-npm.yml'
+
+jobs:
+  medium-test:
+    uses: ./.github/workflows/job-test-medium.yml
+  auto-merge:
+    needs:
+      - medium-test
+    uses: ./.github/workflows/job-auto-merge.yml
+    with:
+      approve-update-type: version-update:semver-patch,version-update:semver-minor
+    permissions:
+      contents: write
+      pull-requests: write

@@ -1,0 +1,42 @@
+name: Job - Pull Request auto merge
+
+on:
+  workflow_call:
+    inputs:
+      approve-update-type:
+        description: |-
+          The type of update that approvable.
+          You can specify 2 or more types separated by a comma,
+          e.g. 'version-update:semver-patch,version-update:semver-minor'.
+          This should be from the following list:
+          - version-update:semver-patch
+          - version-update:semver-minor
+          - version-update:semver-major
+        required: true
+        type: string
+        default: 'version-update:semver-patch'
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v2.4.0
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Auto merge
+        if: ${{ contains(env.APPROVE_UPDATE_TYPES, steps.dependabot-metadata.outputs.update-type) }}
+        run: |
+          APPROVE_TYPES=(${APPROVE_UPDATE_TYPES//,/ })
+          for TYPE in ${APPROVE_TYPES[@]}; do
+            if [ $UPDATE_TYPE == $TYPE ]; then
+            gh pr merge --auto --merge "$PR_URL"
+            fi
+          done
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPDATE_TYPE: ${{ steps.dependabot-metadata.outputs.update-type }}
+          APPROVE_UPDATE_TYPES: ${{ inputs.approve-update-type}}
