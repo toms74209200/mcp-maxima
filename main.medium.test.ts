@@ -38,7 +38,7 @@ test(
     if (!Array.isArray(actual.content)) {
       throw new Error("Expected content to be an array");
     }
-    expect(actual.content[0].text).contain("incorrect syntax");
+    expect(actual.content[0].text).toContain("incorrect syntax");
   },
   1000,
 );
@@ -58,7 +58,7 @@ test("when passing empty command then returns error message", async () => {
   if (!Array.isArray(actual.content)) {
     throw new Error("Expected content to be an array");
   }
-  expect(actual.content[0].text).contain("incorrect syntax");
+  expect(actual.content[0].text).toContain("incorrect syntax");
 }, 1000);
 
 test("when passing invalid name then returns error message", async () => {
