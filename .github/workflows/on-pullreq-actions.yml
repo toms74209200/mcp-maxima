@@ -1,0 +1,17 @@
+name: On Pull Request(GitHub Actions)
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - '.github/workflows/*.yml'
+
+jobs:
+  auto-merge:
+    uses: ./.github/workflows/job-auto-merge.yml
+    with:
+      approve-update-type: version-update:semver-patch,version-update:semver-minor,version-update:semver-major
+    permissions:
+      contents: write
+      pull-requests: write
