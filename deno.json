@@ -1,0 +1,6 @@
+{
+    "tasks": {
+        "test": "vitest run --silent --config ./vite.config.ts",
+        "test:medium": "vitest run --silent --config ./vite.medium.config.ts"
+    }
+}
