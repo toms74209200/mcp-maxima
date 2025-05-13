@@ -69,7 +69,7 @@ test("when passing invalid name then returns error message", async () => {
   const client = new Client({ name: "example-client", version: "1.0.0" });
   await client.connect(transport);
 
-  expect(client.callTool({
+  await expect(client.callTool({
     name: "invalid-name",
     arguments: { command: "diff(sin(x), x)" },
   })).rejects.toThrowError();
