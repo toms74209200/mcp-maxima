@@ -26,6 +26,7 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
       - name: Publish
         run: gh release create ${{ github.ref }} --generate-notes
         env:
