@@ -1,4 +1,21 @@
 {
+    "name": "@toms/mcp-maxima",
+    "description": "Model Context Protocol(MCP) server of Maxima",
+    "version": "0.1.0",
+    "license": "MIT",
+    "exports": {
+        ".": "./main.ts"
+    },
+    "publish": {
+        "include": [
+            "LICENSE",
+            "README.md"
+        ],
+        "exclude": [
+            "*.config.ts",
+            "*.test.ts"
+        ]
+    },
     "tasks": {
         "test": "vitest run --silent --config ./vite.config.ts",
         "test:medium": "vitest run --silent --config ./vite.medium.config.ts"
