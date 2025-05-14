@@ -1,0 +1,32 @@
+name: Job - Publish
+
+on:
+  workflow_call:
+
+jobs:
+  publish-jsr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Install Dependencies
+        run: deno install
+      - name: Publish JSR
+        run: deno publish
+  release:
+    needs:
+      - publish-jsr
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Publish
+        run: gh release create ${{ github.ref }} --generate-notes
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

@@ -1,0 +1,17 @@
+name: On Tag publish
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  medium-test:
+    uses: ./.github/workflows/job-test-medium.yml
+  publish:
+    needs:
+      - medium-test
+    uses: ./.github/workflows/job-publish.yml
+    permissions:
+      contents: write
+      id-token: write
