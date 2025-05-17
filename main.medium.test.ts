@@ -1,22 +1,77 @@
 import { expect, test } from "vitest";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio";
 
 test(
   "when passing correct command then returns correct calculation result",
   async () => {
-    const transport = new StdioClientTransport({
-      command: "deno",
-      args: ["run", "-A", `${Deno.cwd()}/main.ts`],
+    const command = new Deno.Command("deno", {
+      args: ["run", "-A", "--no-check", `${Deno.cwd()}/main.ts`],
+      stdin: "piped",
+      stdout: "piped",
+      stderr: "piped",
     });
-    const client = new Client({ name: "example-client", version: "1.0.0" });
-    await client.connect(transport);
+    const child = command.spawn();
 
-    const actual = await client.callTool({
-      name: "execute-maxima",
-      arguments: { command: "diff(sin(x), x)" },
-    });
-    expect(actual.content).toStrictEqual([{ type: "text", text: "cos(x)" }]);
+    const writer = child.stdin.getWriter();
+    const reader = child.stdout.pipeThrough(new TextDecoderStream())
+      .getReader();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "init-1",
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-03-26",
+          capabilities: {},
+          clientInfo: { name: "test-client-stdio", version: "0.0.1" },
+        },
+      }) + "\n",
+    ));
+
+    const readLines = async () => {
+      const line = await reader.read();
+      if (line.done) {
+        return;
+      }
+      try {
+        return JSON.parse(line.value);
+      } catch {
+        return await readLines();
+      }
+    };
+
+    await readLines();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        method: "initialized",
+        params: {},
+      }) + "\n",
+    ));
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "call-1",
+        method: "tools/call",
+        params: {
+          name: "execute-maxima",
+          arguments: { command: "diff(sin(x), x)" },
+        },
+      }) + "\n",
+    ));
+
+    const actual = await readLines();
+
+    expect(actual.result.content).toStrictEqual([{
+      type: "text",
+      text: "cos(x)",
+    }]);
+
+    await writer.close();
+    child.kill("SIGTERM");
+    await child.status;
   },
   1000,
 );
@@ -24,23 +79,84 @@ test(
 test(
   "when calling random command twice then returns different numbers",
   async () => {
-    const transport = new StdioClientTransport({
-      command: "deno",
-      args: ["run", "-A", `${Deno.cwd()}/main.ts`],
+    const command = new Deno.Command("deno", {
+      args: ["run", "-A", "--no-check", `${Deno.cwd()}/main.ts`],
+      stdin: "piped",
+      stdout: "piped",
+      stderr: "piped",
     });
-    const client = new Client({ name: "example-client", version: "1.0.0" });
-    await client.connect(transport);
+    const child = command.spawn();
 
-    const actual1 = await client.callTool({
-      name: "execute-maxima",
-      arguments: { command: "random(1.0)" },
-    });
+    const writer = child.stdin.getWriter();
+    const reader = child.stdout.pipeThrough(new TextDecoderStream())
+      .getReader();
 
-    const actual2 = await client.callTool({
-      name: "execute-maxima",
-      arguments: { command: "random(1.0)" },
-    });
-    expect(actual1).not.toStrictEqual(actual2);
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "init-1",
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-03-26",
+          capabilities: {},
+          clientInfo: { name: "test-client-stdio", version: "0.0.1" },
+        },
+      }) + "\n",
+    ));
+
+    const readLines = async () => {
+      const line = await reader.read();
+      if (line.done) {
+        return;
+      }
+      try {
+        return JSON.parse(line.value);
+      } catch {
+        return await readLines();
+      }
+    };
+
+    await readLines(); // initialize response
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        method: "initialized",
+        params: {},
+      }) + "\n",
+    ));
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "call-1",
+        method: "tools/call",
+        params: {
+          name: "execute-maxima",
+          arguments: { command: "random(1.0)" },
+        },
+      }) + "\n",
+    ));
+    const actual1 = await readLines();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "call-2",
+        method: "tools/call",
+        params: {
+          name: "execute-maxima",
+          arguments: { command: "random(1.0)" },
+        },
+      }) + "\n",
+    ));
+    const actual2 = await readLines();
+
+    expect(actual1.result.content).not.toStrictEqual(actual2.result.content);
+
+    await writer.close();
+    child.kill("SIGTERM");
+    await child.status;
   },
   1000,
 );
@@ -48,53 +164,217 @@ test(
 test(
   "when passing incorrect arguments then returns error message",
   async () => {
-    const transport = new StdioClientTransport({
-      command: "deno",
-      args: ["run", "-A", `${Deno.cwd()}/main.ts`],
+    const command = new Deno.Command("deno", {
+      args: ["run", "-A", "--no-check", `${Deno.cwd()}/main.ts`],
+      stdin: "piped",
+      stdout: "piped",
+      stderr: "piped",
     });
-    const client = new Client({ name: "example-client", version: "1.0.0" });
-    await client.connect(transport);
+    const child = command.spawn();
 
-    const actual = await client.callTool({
-      name: "execute-maxima",
-      arguments: { command: "invalid(" },
-    });
-    if (!Array.isArray(actual.content)) {
+    const writer = child.stdin.getWriter();
+    const reader = child.stdout.pipeThrough(new TextDecoderStream())
+      .getReader();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "init-1",
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-03-26",
+          capabilities: {},
+          clientInfo: { name: "test-client-stdio", version: "0.0.1" },
+        },
+      }) + "\n",
+    ));
+
+    const readLines = async () => {
+      const line = await reader.read();
+      if (line.done) {
+        return;
+      }
+      try {
+        return JSON.parse(line.value);
+      } catch {
+        return await readLines();
+      }
+    };
+
+    await readLines(); // initialize response
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        method: "initialized",
+        params: {},
+      }) + "\n",
+    ));
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "call-1",
+        method: "tools/call",
+        params: {
+          name: "execute-maxima",
+          arguments: { command: "invalid(" },
+        },
+      }) + "\n",
+    ));
+
+    const actual = await readLines();
+
+    if (!Array.isArray(actual.result.content)) {
       throw new Error("Expected content to be an array");
     }
-    expect(actual.content[0].text).toContain("incorrect syntax");
+    expect(actual.result.content[0].text).toContain("incorrect syntax");
+
+    await writer.close();
+    child.kill("SIGTERM");
+    await child.status;
   },
   1000,
 );
 
 test("when passing empty command then returns error message", async () => {
-  const transport = new StdioClientTransport({
-    command: "deno",
-    args: ["run", "-A", `${Deno.cwd()}/main.ts`],
+  const command = new Deno.Command("deno", {
+    args: ["run", "-A", "--no-check", `${Deno.cwd()}/main.ts`],
+    stdin: "piped",
+    stdout: "piped",
+    stderr: "piped",
   });
-  const client = new Client({ name: "example-client", version: "1.0.0" });
-  await client.connect(transport);
+  const child = command.spawn();
 
-  const actual = await client.callTool({
-    name: "execute-maxima",
-    arguments: { command: "" },
-  });
-  if (!Array.isArray(actual.content)) {
+  const writer = child.stdin.getWriter();
+  const reader = child.stdout.pipeThrough(new TextDecoderStream())
+    .getReader();
+
+  await writer.write(new TextEncoder().encode(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      id: "init-1",
+      method: "initialize",
+      params: {
+        protocolVersion: "2025-03-26",
+        capabilities: {},
+        clientInfo: { name: "test-client-stdio", version: "0.0.1" },
+      },
+    }) + "\n",
+  ));
+
+  const readLines = async () => {
+    const line = await reader.read();
+    if (line.done) {
+      return;
+    }
+    try {
+      return JSON.parse(line.value);
+    } catch {
+      return await readLines();
+    }
+  };
+
+  await readLines(); // initialize response
+
+  await writer.write(new TextEncoder().encode(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      method: "initialized",
+      params: {},
+    }) + "\n",
+  ));
+
+  await writer.write(new TextEncoder().encode(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      id: "call-1",
+      method: "tools/call",
+      params: {
+        name: "execute-maxima",
+        arguments: { command: "" },
+      },
+    }) + "\n",
+  ));
+
+  const actual = await readLines();
+
+  if (!Array.isArray(actual.result.content)) {
     throw new Error("Expected content to be an array");
   }
-  expect(actual.content[0].text).toContain("incorrect syntax");
+  expect(actual.result.content[0].text).toContain("incorrect syntax");
+
+  await writer.close();
+  child.kill("SIGTERM");
+  await child.status;
 }, 1000);
 
 test("when passing invalid name then returns error message", async () => {
-  const transport = new StdioClientTransport({
-    command: "deno",
-    args: ["run", "-A", `${Deno.cwd()}/main.ts`],
+  const command = new Deno.Command("deno", {
+    args: ["run", "-A", "--no-check", `${Deno.cwd()}/main.ts`],
+    stdin: "piped",
+    stdout: "piped",
+    stderr: "piped",
   });
-  const client = new Client({ name: "example-client", version: "1.0.0" });
-  await client.connect(transport);
+  const child = command.spawn();
 
-  await expect(client.callTool({
-    name: "invalid-name",
-    arguments: { command: "diff(sin(x), x)" },
-  })).rejects.toThrowError();
+  const writer = child.stdin.getWriter();
+  const reader = child.stdout.pipeThrough(new TextDecoderStream())
+    .getReader();
+
+  await writer.write(new TextEncoder().encode(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      id: "init-1",
+      method: "initialize",
+      params: {
+        protocolVersion: "2025-03-26",
+        capabilities: {},
+        clientInfo: { name: "test-client-stdio", version: "0.0.1" },
+      },
+    }) + "\n",
+  ));
+
+  const readLines = async () => {
+    const line = await reader.read();
+    if (line.done) {
+      return;
+    }
+    try {
+      return JSON.parse(line.value);
+    } catch {
+      return await readLines();
+    }
+  };
+
+  await readLines(); // initialize response
+
+  await writer.write(new TextEncoder().encode(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      method: "initialized",
+      params: {},
+    }) + "\n",
+  ));
+
+  await writer.write(new TextEncoder().encode(
+    JSON.stringify({
+      jsonrpc: "2.0",
+      id: "call-1",
+      method: "tools/call",
+      params: {
+        name: "invalid-name",
+        arguments: { command: "diff(sin(x), x)" },
+      },
+    }) + "\n",
+  ));
+
+  const actual = await readLines();
+
+  expect(actual.error).toBeDefined();
+  expect(actual.error.message).toContain("Tool invalid-name not found");
+
+  await writer.close();
+  child.kill("SIGTERM");
+  await child.status;
 }, 1000);
