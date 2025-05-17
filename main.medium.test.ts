@@ -22,6 +22,30 @@ test(
 );
 
 test(
+  "when calling random command twice then returns different numbers",
+  async () => {
+    const transport = new StdioClientTransport({
+      command: "deno",
+      args: ["run", "-A", `${Deno.cwd()}/main.ts`],
+    });
+    const client = new Client({ name: "example-client", version: "1.0.0" });
+    await client.connect(transport);
+
+    const actual1 = await client.callTool({
+      name: "execute-maxima",
+      arguments: { command: "random(1.0)" },
+    });
+
+    const actual2 = await client.callTool({
+      name: "execute-maxima",
+      arguments: { command: "random(1.0)" },
+    });
+    expect(actual1).not.toStrictEqual(actual2);
+  },
+  1000,
+);
+
+test(
   "when passing incorrect arguments then returns error message",
   async () => {
     const transport = new StdioClientTransport({
