@@ -9,12 +9,16 @@ const server = new McpServer({
 
 async function runMaximaCommand(command: string): Promise<string> {
   const displaySetting = "display2d: false";
+  const randomStateSetting = `s: make_random_state(${
+    Math.ceil(Math.random() * 65535)
+  })`;
+  const randomSeedSetting = `set_random_state(s)`;
 
   const cmd = new Deno.Command("maxima", {
     args: [
       "--very-quiet",
       "--batch-string",
-      `${displaySetting}$ ${command};`,
+      `${displaySetting}$ ${randomStateSetting}$ ${randomSeedSetting}$ ${command};`,
     ],
     stdout: "piped",
     stderr: "piped",
@@ -30,6 +34,12 @@ async function runMaximaCommand(command: string): Promise<string> {
 
   return new TextDecoder().decode(stdout).replace(
     displaySetting.replace(" ", ""),
+    "",
+  ).replace(
+    randomStateSetting.replace(" ", ""),
+    "",
+  ).replace(
+    randomSeedSetting.replace(" ", ""),
     "",
   ).replace(
     command.replace(" ", ""),
