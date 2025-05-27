@@ -1,0 +1,32 @@
+name: Job - Update Dependencies Lock File
+
+on:
+  workflow_call:
+
+jobs:
+  update-dependencies-lock:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Install Dependencies
+        run: deno install
+      - name: Check for changes in dependencies lock file
+        id: diff
+        run: |
+          git diff --quiet deno.lock || echo "changed=true" >> $GITHUB_OUTPUT
+        shell: bash
+      - name: Commit dependencies lock file
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m ":arrow_up: Update dependencies lock file"
+          git push
+        shell: bash
