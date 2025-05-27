@@ -12,6 +12,11 @@ on:
 jobs:
   medium-test:
     uses: ./.github/workflows/job-test-medium.yml
+  update-dependencies-lock:
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    uses: ./.github/workflows/job-update-dependencies-lock.yml
+    permissions:
+      contents: write
   auto-merge:
     needs:
       - medium-test
