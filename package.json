@@ -5,6 +5,6 @@
   },
   "devDependencies": {
     "vite": "^6.3.5",
-    "vitest": "^3.2.1"
+    "vitest": "^3.2.3"
   }
 }
