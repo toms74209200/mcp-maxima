@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@modelcontextprotocol/sdk@^1.12.3": "1.12.3_express@5.1.0_zod@3.25.67",
+    "npm:@modelcontextprotocol/sdk@^1.13.1": "1.13.1_express@5.1.0_zod@3.25.67",
     "npm:vite@^6.3.5": "6.3.5_picomatch@4.0.2",
     "npm:vitest@^3.2.4": "3.2.4_vite@6.3.5__picomatch@4.0.2",
     "npm:zod@^3.25.67": "3.25.67"
@@ -135,8 +135,8 @@
     "@jridgewell/sourcemap-codec@1.5.0": {
       "integrity": "sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ=="
     },
-    "@modelcontextprotocol/sdk@1.12.3_express@5.1.0_zod@3.25.67": {
-      "integrity": "sha512-DyVYSOafBvk3/j1Oka4z5BWT8o4AFmoNyZY9pALOm7Lh3GZglR71Co4r4dEUoqDWdDazIZQHBe7J2Nwkg6gHgQ==",
+    "@modelcontextprotocol/sdk@1.13.1_express@5.1.0_zod@3.25.67": {
+      "integrity": "sha512-8q6+9aF0yA39/qWT/uaIj6zTpC+Qu07DnN/lb9mjoquCJsAh6l3HyYqc9O3t2j7GilseOQOQimLg7W3By6jqvg==",
       "dependencies": [
         "ajv",
         "content-type",
@@ -514,8 +514,8 @@
     "expect-type@1.2.1": {
       "integrity": "sha512-/kP8CAwxzLVEeFrMm4kMmy4CCDlpipyA7MYLVrdJIkV0fYF0UaigQHRsxHiuY/GEea+bh4KSv3TIlgr+2UL6bw=="
     },
-    "express-rate-limit@7.5.0_express@5.1.0": {
-      "integrity": "sha512-eB5zbQh5h+VenMPM3fh+nw1YExi5nMr6HUCR62ELSP11huvxm/Uir1H1QEyTkk5QX6A58pX6NmaTMceKZ0Eodg==",
+    "express-rate-limit@7.5.1_express@5.1.0": {
+      "integrity": "sha512-7iN8iPMDzOMHPUYllBEsQdWVB6fPDMPqwjBaFrgr4Jgr/+okjvzAy+UHlYYL/Vs0OsOrMkwS6PJDkFlJwoxUnw==",
       "dependencies": [
         "express"
       ]
@@ -1056,7 +1056,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@modelcontextprotocol/sdk@^1.12.3",
+        "npm:@modelcontextprotocol/sdk@^1.13.1",
         "npm:vite@^6.3.5",
         "npm:vitest@^3.2.4",
         "npm:zod@^3.25.67"
