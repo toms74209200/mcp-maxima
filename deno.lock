@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@modelcontextprotocol/sdk@^1.13.1": "1.13.1_express@5.1.0_zod@3.25.67",
+    "npm:@modelcontextprotocol/sdk@^1.13.3": "1.13.3_express@5.1.0_zod@3.25.67",
     "npm:vite@7": "7.0.0_picomatch@4.0.2",
     "npm:vitest@^3.2.4": "3.2.4_vite@7.0.0__picomatch@4.0.2",
     "npm:zod@^3.25.67": "3.25.67"
@@ -260,14 +260,15 @@
     "@jridgewell/sourcemap-codec@1.5.0": {
       "integrity": "sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ=="
     },
-    "@modelcontextprotocol/sdk@1.13.1_express@5.1.0_zod@3.25.67": {
-      "integrity": "sha512-8q6+9aF0yA39/qWT/uaIj6zTpC+Qu07DnN/lb9mjoquCJsAh6l3HyYqc9O3t2j7GilseOQOQimLg7W3By6jqvg==",
+    "@modelcontextprotocol/sdk@1.13.3_express@5.1.0_zod@3.25.67": {
+      "integrity": "sha512-bGwA78F/U5G2jrnsdRkPY3IwIwZeWUEfb5o764b79lb0rJmMT76TLwKhdNZOWakOQtedYefwIR4emisEMvInKA==",
       "dependencies": [
         "ajv",
         "content-type",
         "cors",
         "cross-spawn",
         "eventsource",
+        "eventsource-parser",
         "express",
         "express-rate-limit",
         "pkce-challenge",
@@ -727,8 +728,8 @@
     "etag@1.8.1": {
       "integrity": "sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg=="
     },
-    "eventsource-parser@3.0.2": {
-      "integrity": "sha512-6RxOBZ/cYgd8usLwsEl+EC09Au/9BcmCKYF2/xbml6DNczf7nv0MQb+7BA2F+li6//I+28VNlQR37XfQtcAJuA=="
+    "eventsource-parser@3.0.3": {
+      "integrity": "sha512-nVpZkTMM9rF6AQ9gPJpFsNAMt48wIzB5TQgiTLdHiuO8XEDhUgZEhqKlZWXbIzo9VmJ/HvysHqEaVeD5v9TPvA=="
     },
     "eventsource@3.0.7": {
       "integrity": "sha512-CRT1WTyuQoD771GW56XEZFQ/ZoSfWid1alKGDYMmkt2yl8UXrVR4pspqWNEcqKvVIzg6PAltWjxcSSPrboA4iA==",
@@ -1261,8 +1262,8 @@
     "wrappy@1.0.2": {
       "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
     },
-    "zod-to-json-schema@3.24.5_zod@3.25.67": {
-      "integrity": "sha512-/AuWwMP+YqiPbsJx5D6TfgRTc4kTLjsh5SOcd4bLsfUg2RcEXrFMJl1DGgdHy2aCfsIA/cr/1JM0xcB2GZji8g==",
+    "zod-to-json-schema@3.24.6_zod@3.25.67": {
+      "integrity": "sha512-h/z3PKvcTcTetyjl1fkj79MHNEjm+HpD6NXheWjzOekY7kV+lwDYnHw+ivHkijnCSMz1yJaWBD9vu/Fcmk+vEg==",
       "dependencies": [
         "zod"
       ]
@@ -1274,7 +1275,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@modelcontextprotocol/sdk@^1.13.1",
+        "npm:@modelcontextprotocol/sdk@^1.13.3",
         "npm:vite@7",
         "npm:vitest@^3.2.4",
         "npm:zod@^3.25.67"
