@@ -1,1 +1,10 @@
 node_modules/
+
+.claude/
+CLAUDE.md
+copilot-instructions.md
+.instructions/
+*mcp.json
+wampa*
+
+gitmoji-cache.json
