@@ -1,0 +1,9 @@
+name: On Scheduled
+
+on:
+  schedule:
+    - cron: "0 21 * * 2"
+
+jobs:
+  build:
+    uses: ./.github/workflows/job-build-image.yml
