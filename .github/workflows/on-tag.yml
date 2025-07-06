@@ -15,3 +15,5 @@ jobs:
     permissions:
       contents: write
       id-token: write
+  build-image:
+    uses: ./.github/workflows/job-build-image.yml
