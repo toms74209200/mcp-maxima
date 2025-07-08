@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.13.3",
-    "zod": "^3.25.67"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "vite": "^7.0.0",
