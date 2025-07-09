@@ -1,7 +1,7 @@
 {
     "name": "@toms/mcp-maxima",
     "description": "Model Context Protocol(MCP) server of Maxima",
-    "version": "0.1.7",
+    "version": "0.2.0",
     "license": "MIT",
     "exports": {
         ".": "./main.ts"
