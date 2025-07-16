@@ -4,7 +4,7 @@
     "npm:@modelcontextprotocol/sdk@^1.15.1": "1.15.1_express@5.1.0_zod@3.25.76",
     "npm:vite@^7.0.4": "7.0.4_picomatch@4.0.3",
     "npm:vitest@^3.2.4": "3.2.4_vite@7.0.4__picomatch@4.0.3",
-    "npm:zod@^3.25.76": "3.25.76"
+    "npm:zod@^4.0.5": "4.0.5"
   },
   "npm": {
     "@esbuild/aix-ppc64@0.25.4": {
@@ -403,7 +403,7 @@
         "express-rate-limit",
         "pkce-challenge",
         "raw-body",
-        "zod",
+        "zod@3.25.76",
         "zod-to-json-schema"
       ]
     },
@@ -1596,11 +1596,14 @@
     "zod-to-json-schema@3.24.6_zod@3.25.76": {
       "integrity": "sha512-h/z3PKvcTcTetyjl1fkj79MHNEjm+HpD6NXheWjzOekY7kV+lwDYnHw+ivHkijnCSMz1yJaWBD9vu/Fcmk+vEg==",
       "dependencies": [
-        "zod"
+        "zod@3.25.76"
       ]
     },
     "zod@3.25.76": {
       "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
+    },
+    "zod@4.0.5": {
+      "integrity": "sha512-/5UuuRPStvHXu7RS+gmvRf4NXrNxpSllGwDnCBcJZtQsKrviYXm54yDGV2KYNLT5kq0lHGcl7lqWJLgSaG+tgA=="
     }
   },
   "workspace": {
@@ -1609,7 +1612,7 @@
         "npm:@modelcontextprotocol/sdk@^1.15.1",
         "npm:vite@^7.0.4",
         "npm:vitest@^3.2.4",
-        "npm:zod@^3.25.76"
+        "npm:zod@^4.0.5"
       ]
     }
   }
