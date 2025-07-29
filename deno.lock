@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@modelcontextprotocol/sdk@^1.16.0": "1.16.0_express@5.1.0_zod@3.25.76",
+    "npm:@modelcontextprotocol/sdk@^1.17.0": "1.17.0_express@5.1.0_zod@3.25.76",
     "npm:vite@^7.0.5": "7.0.5_picomatch@4.0.3",
     "npm:vitest@^3.2.4": "3.2.4_vite@7.0.5__picomatch@4.0.3",
     "npm:zod@^3.25.76": "3.25.76"
@@ -520,8 +520,8 @@
     "@jridgewell/sourcemap-codec@1.5.4": {
       "integrity": "sha512-VT2+G1VQs/9oz078bLrYbecdZKs912zQlkelYpuf+SXF+QvZDYJlbx/LSx+meSAwdDFnF8FVXW92AVjjkVmgFw=="
     },
-    "@modelcontextprotocol/sdk@1.16.0_express@5.1.0_zod@3.25.76": {
-      "integrity": "sha512-8ofX7gkZcLj9H9rSd50mCgm3SSF8C7XoclxJuLoV0Cz3rEQ1tv9MZRYYvJtm9n1BiEQQMzSmE/w2AEkNacLYfg==",
+    "@modelcontextprotocol/sdk@1.17.0_express@5.1.0_zod@3.25.76": {
+      "integrity": "sha512-qFfbWFA7r1Sd8D697L7GkTd36yqDuTkvz0KfOGkgXR8EUhQn3/EDNIR/qUdQNMT8IjmasBvHWuXeisxtXTQT2g==",
       "dependencies": [
         "ajv",
         "content-type",
@@ -1736,7 +1736,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@modelcontextprotocol/sdk@^1.16.0",
+        "npm:@modelcontextprotocol/sdk@^1.17.0",
         "npm:vite@^7.0.5",
         "npm:vitest@^3.2.4",
         "npm:zod@^3.25.76"
