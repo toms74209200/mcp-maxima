@@ -109,7 +109,7 @@ jobs:
         run: |
           docker buildx imagetools inspect ghcr.io/${{ github.repository }}:${{ steps.tag.outputs.latest-tag }}
           docker buildx imagetools inspect ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:${{ steps.tag.outputs.latest-tag }}
-      - uses: peter-evans/dockerhub-description@v4
+      - uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
