@@ -1,9 +1,9 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@modelcontextprotocol/sdk@^1.20.1": "1.20.1_express@5.1.0_zod@3.25.76",
-    "npm:vite@^7.1.11": "7.1.11_picomatch@4.0.3",
-    "npm:vitest@^3.2.4": "3.2.4_vite@7.1.11__picomatch@4.0.3",
+    "npm:@modelcontextprotocol/sdk@^1.20.1": "1.20.2_express@5.1.0_zod@3.25.76",
+    "npm:vite@^7.1.12": "7.1.12_picomatch@4.0.3",
+    "npm:vitest@^3.2.4": "3.2.4_vite@7.1.12__picomatch@4.0.3",
     "npm:zod@^3.25.76": "3.25.76"
   },
   "npm": {
@@ -520,8 +520,8 @@
     "@jridgewell/sourcemap-codec@1.5.5": {
       "integrity": "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="
     },
-    "@modelcontextprotocol/sdk@1.20.1_express@5.1.0_zod@3.25.76": {
-      "integrity": "sha512-j/P+yuxXfgxb+mW7OEoRCM3G47zCTDqUPivJo/VzpjbG8I9csTXtOprCf5FfOfHK4whOJny0aHuBEON+kS7CCA==",
+    "@modelcontextprotocol/sdk@1.20.2_express@5.1.0_zod@3.25.76": {
+      "integrity": "sha512-6rqTdFt67AAAzln3NOKsXRmv5ZzPkgbfaebKBqUbts7vK1GZudqnrun5a8d3M/h955cam9RHZ6Jb4Y1XhnmFPg==",
       "dependencies": [
         "ajv",
         "content-type",
@@ -1070,7 +1070,7 @@
         "tinyrainbow"
       ]
     },
-    "@vitest/mocker@3.2.4_vite@7.1.11__picomatch@4.0.3": {
+    "@vitest/mocker@3.2.4_vite@7.1.12__picomatch@4.0.3": {
       "integrity": "sha512-46ryTE9RZO/rfDd7pEqFl7etuyzekzEhUbTW3BvmeO/BcCMEgq59BKhek3dXDWgAj4oMK6OZi+vRr1wPW6qjEQ==",
       "dependencies": [
         "@vitest/spy",
@@ -1467,8 +1467,8 @@
     "loupe@3.2.1": {
       "integrity": "sha512-CdzqowRJCeLU72bHvWqwRBBlLcMEtIvGrlvef74kMnV2AolS9Y8xUv1I0U/MNAWMhBlKIoyuEgoJ0t/bbwHbLQ=="
     },
-    "magic-string@0.30.19": {
-      "integrity": "sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==",
+    "magic-string@0.30.21": {
+      "integrity": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==",
       "dependencies": [
         "@jridgewell/sourcemap-codec"
       ]
@@ -1780,8 +1780,8 @@
       ],
       "bin": true
     },
-    "vite@7.1.11_picomatch@4.0.3": {
-      "integrity": "sha512-uzcxnSDVjAopEUjljkWh8EIrg6tlzrjFUfMcR1EVsRDGwf/ccef0qQPRyOrROwhrTDaApueq+ja+KLPlzR/zdg==",
+    "vite@7.1.12_picomatch@4.0.3": {
+      "integrity": "sha512-ZWyE8YXEXqJrrSLvYgrRP7p62OziLW7xI5HYGWFzOvupfAlrLvURSzv/FyGyy0eidogEM3ujU+kUG1zuHgb6Ug==",
       "dependencies": [
         "esbuild",
         "fdir",
@@ -1795,7 +1795,7 @@
       ],
       "bin": true
     },
-    "vitest@3.2.4_vite@7.1.11__picomatch@4.0.3": {
+    "vitest@3.2.4_vite@7.1.12__picomatch@4.0.3": {
       "integrity": "sha512-LUCP5ev3GURDysTWiP47wRRUpLKMOfPh+yKTx3kVIEiu5KOMeqzpnYNsKyOoVrULivR8tLcks4+lga33Whn90A==",
       "dependencies": [
         "@types/chai",
@@ -1856,7 +1856,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@modelcontextprotocol/sdk@^1.20.1",
-        "npm:vite@^7.1.11",
+        "npm:vite@^7.1.12",
         "npm:vitest@^3.2.4",
         "npm:zod@^3.25.76"
       ]
