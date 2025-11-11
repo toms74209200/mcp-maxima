@@ -57,6 +57,15 @@ server.tool(
   async ({ command }) => {
     try {
       const result = await runMaximaCommand(command);
+      if (result.includes("incorrect syntax")) {
+        return {
+          content: [{
+            type: "text",
+            text: result,
+          }],
+          isError: true,
+        };
+      }
       return {
         content: [{ type: "text", text: result }],
       };
