@@ -47,12 +47,15 @@ async function runMaximaCommand(command: string): Promise<string> {
   ).trim();
 }
 
-server.tool(
+server.registerTool(
   "execute-maxima",
   {
-    command: z.string().describe(
-      "The Maxima command to execute (e.g., 'diff(sin(x), x)')",
-    ),
+    description: "Execute a Maxima command for symbolic mathematics",
+    inputSchema: {
+      command: z.string().describe(
+        "The Maxima command to execute (e.g., 'diff(sin(x), x)')",
+      ),
+    },
   },
   async ({ command }) => {
     try {
