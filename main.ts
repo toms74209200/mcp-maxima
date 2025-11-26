@@ -85,10 +85,7 @@ server.tool(
   },
 );
 
-console.log("Starting Maxima MCP server via stdio...");
 const transport = new StdioServerTransport();
-server.connect(transport).then(() => {
-  console.log("Maxima MCP server connected to stdio transport.");
-}).catch((err) => {
+server.connect(transport).catch((err) => {
   console.error("Failed to connect Maxima MCP server:", err);
 });
