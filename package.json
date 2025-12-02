@@ -4,7 +4,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "vite": "^7.2.4",
+    "vite": "^7.2.6",
     "vitest": "^4.0.8"
   }
 }
