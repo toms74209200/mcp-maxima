@@ -3,7 +3,7 @@
   "specifiers": {
     "npm:@modelcontextprotocol/sdk@^1.22.0": "1.22.0_ajv@8.17.1_express@5.1.0_zod@3.25.76",
     "npm:vite@^7.2.4": "7.2.4_picomatch@4.0.3",
-    "npm:vitest@^4.0.8": "4.0.8_vite@7.2.4__picomatch@4.0.3",
+    "npm:vitest@^4.0.15": "4.0.15_vite@7.2.4__picomatch@4.0.3",
     "npm:zod@^3.25.76": "3.25.76"
   },
   "npm": {
@@ -284,8 +284,8 @@
     "@types/estree@1.0.8": {
       "integrity": "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="
     },
-    "@vitest/expect@4.0.8": {
-      "integrity": "sha512-Rv0eabdP/xjAHQGr8cjBm+NnLHNoL268lMDK85w2aAGLFoVKLd8QGnVon5lLtkXQCoYaNL0wg04EGnyKkkKhPA==",
+    "@vitest/expect@4.0.15": {
+      "integrity": "sha512-Gfyva9/GxPAWXIWjyGDli9O+waHDC0Q0jaLdFP1qPAUUfo1FEXPXUfUkp3eZA0sSq340vPycSyOlYUeM15Ft1w==",
       "dependencies": [
         "@standard-schema/spec",
         "@types/chai",
@@ -295,8 +295,8 @@
         "tinyrainbow"
       ]
     },
-    "@vitest/mocker@4.0.8_vite@7.2.4__picomatch@4.0.3": {
-      "integrity": "sha512-9FRM3MZCedXH3+pIh+ME5Up2NBBHDq0wqwhOKkN4VnvCiKbVxddqH9mSGPZeawjd12pCOGnl+lo/ZGHt0/dQSg==",
+    "@vitest/mocker@4.0.15_vite@7.2.4__picomatch@4.0.3": {
+      "integrity": "sha512-CZ28GLfOEIFkvCFngN8Sfx5h+Se0zN+h4B7yOsPVCcgtiO7t5jt9xQh2E1UkFep+eb9fjyMfuC5gBypwb07fvQ==",
       "dependencies": [
         "@vitest/spy",
         "estree-walker",
@@ -307,32 +307,32 @@
         "vite"
       ]
     },
-    "@vitest/pretty-format@4.0.8": {
-      "integrity": "sha512-qRrjdRkINi9DaZHAimV+8ia9Gq6LeGz2CgIEmMLz3sBDYV53EsnLZbJMR1q84z1HZCMsf7s0orDgZn7ScXsZKg==",
+    "@vitest/pretty-format@4.0.15": {
+      "integrity": "sha512-SWdqR8vEv83WtZcrfLNqlqeQXlQLh2iilO1Wk1gv4eiHKjEzvgHb2OVc3mIPyhZE6F+CtfYjNlDJwP5MN6Km7A==",
       "dependencies": [
         "tinyrainbow"
       ]
     },
-    "@vitest/runner@4.0.8": {
-      "integrity": "sha512-mdY8Sf1gsM8hKJUQfiPT3pn1n8RF4QBcJYFslgWh41JTfrK1cbqY8whpGCFzBl45LN028g0njLCYm0d7XxSaQQ==",
+    "@vitest/runner@4.0.15": {
+      "integrity": "sha512-+A+yMY8dGixUhHmNdPUxOh0la6uVzun86vAbuMT3hIDxMrAOmn5ILBHm8ajrqHE0t8R9T1dGnde1A5DTnmi3qw==",
       "dependencies": [
         "@vitest/utils",
         "pathe"
       ]
     },
-    "@vitest/snapshot@4.0.8": {
-      "integrity": "sha512-Nar9OTU03KGiubrIOFhcfHg8FYaRaNT+bh5VUlNz8stFhCZPNrJvmZkhsr1jtaYvuefYFwK2Hwrq026u4uPWCw==",
+    "@vitest/snapshot@4.0.15": {
+      "integrity": "sha512-A7Ob8EdFZJIBjLjeO0DZF4lqR6U7Ydi5/5LIZ0xcI+23lYlsYJAfGn8PrIWTYdZQRNnSRlzhg0zyGu37mVdy5g==",
       "dependencies": [
         "@vitest/pretty-format",
         "magic-string",
         "pathe"
       ]
     },
-    "@vitest/spy@4.0.8": {
-      "integrity": "sha512-nvGVqUunyCgZH7kmo+Ord4WgZ7lN0sOULYXUOYuHr55dvg9YvMz3izfB189Pgp28w0vWFbEEfNc/c3VTrqrXeA=="
+    "@vitest/spy@4.0.15": {
+      "integrity": "sha512-+EIjOJmnY6mIfdXtE/bnozKEvTC4Uczg19yeZ2vtCz5Yyb0QQ31QWVQ8hswJ3Ysx/K2EqaNsVanjr//2+P3FHw=="
     },
-    "@vitest/utils@4.0.8": {
-      "integrity": "sha512-pdk2phO5NDvEFfUTxcTP8RFYjVj/kfLSPIN5ebP2Mu9kcIMeAQTbknqcFEyBcC4z2pJlJI9aS5UQjcYfhmKAow==",
+    "@vitest/utils@4.0.15": {
+      "integrity": "sha512-HXjPW2w5dxhTD0dLwtYHDnelK3j8sR8cWIaLxr22evTyY6q8pRCjZSmhRWVjBaOVXChQd6AwMzi9pucorXCPZA==",
       "dependencies": [
         "@vitest/pretty-format",
         "tinyrainbow"
@@ -711,6 +711,9 @@
     "object-inspect@1.13.4": {
       "integrity": "sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew=="
     },
+    "obug@2.1.1": {
+      "integrity": "sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ=="
+    },
     "on-finished@2.4.1": {
       "integrity": "sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==",
       "dependencies": [
@@ -916,8 +919,8 @@
     "tinybench@2.9.0": {
       "integrity": "sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg=="
     },
-    "tinyexec@0.3.2": {
-      "integrity": "sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA=="
+    "tinyexec@1.0.2": {
+      "integrity": "sha512-W/KYk+NFhkmsYpuHq5JykngiOCnxeVL8v8dFnqxSD8qEEdRfXk1SDM6JzNqcERbcGYj9tMrDQBYV9cjgnunFIg=="
     },
     "tinyglobby@0.2.15_picomatch@4.0.3": {
       "integrity": "sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==",
@@ -961,8 +964,8 @@
       ],
       "bin": true
     },
-    "vitest@4.0.8_vite@7.2.4__picomatch@4.0.3": {
-      "integrity": "sha512-urzu3NCEV0Qa0Y2PwvBtRgmNtxhj5t5ULw7cuKhIHh3OrkKTLlut0lnBOv9qe5OvbkMH2g38G7KPDCTpIytBVg==",
+    "vitest@4.0.15_vite@7.2.4__picomatch@4.0.3": {
+      "integrity": "sha512-n1RxDp8UJm6N0IbJLQo+yzLZ2sQCDyl1o0LeugbPWf8+8Fttp29GghsQBjYJVmWq3gBFfe9Hs1spR44vovn2wA==",
       "dependencies": [
         "@vitest/expect",
         "@vitest/mocker",
@@ -971,10 +974,10 @@
         "@vitest/snapshot",
         "@vitest/spy",
         "@vitest/utils",
-        "debug",
         "es-module-lexer",
         "expect-type",
         "magic-string",
+        "obug",
         "pathe",
         "picomatch",
         "std-env",
@@ -1020,7 +1023,7 @@
       "dependencies": [
         "npm:@modelcontextprotocol/sdk@^1.22.0",
         "npm:vite@^7.2.4",
-        "npm:vitest@^4.0.8",
+        "npm:vitest@^4.0.15",
         "npm:zod@^3.25.76"
       ]
     }
