@@ -3,6 +3,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import process from "node:process";
 
 const server = new McpServer({
   name: "Maxima-MCP-Server",
@@ -34,29 +35,31 @@ const createNodeExecutor = async (
   command: string,
   args: string[],
 ): Promise<{ stdout: string; stderr: string; code: number }> => {
-  const execFileAsync = (() => {
-    try {
-      return promisify(execFile);
-    } catch {
-      throw new Error("Node.js runtime not available");
-    }
-  })();
+  if (typeof process === "undefined") {
+    throw new Error("Node.js runtime not available");
+  }
 
-  try {
-    const { stdout, stderr } = await execFileAsync(command, args);
-    return { code: 0, stdout, stderr: stderr || "" };
-  } catch (error: unknown) {
-    if (
-      error && typeof error === "object" && "code" in error &&
-      typeof error.code === "number"
-    ) {
-      return {
-        code: error.code,
-        stdout: "",
-        stderr: String(error),
-      };
-    }
-    return { code: -1, stdout: "", stderr: String(error) };
+  const execFileAsync = promisify(execFile);
+
+  const result: { stdout: string; stderr: string } | any = await execFileAsync(
+    command,
+    args,
+  ).catch((error: any) => error);
+
+  if (!("code" in result)) {
+    return { code: 0, stdout: result.stdout, stderr: result.stderr || "" };
+  }
+
+  const stdout = result.stdout || "";
+  const stderr = result.stderr || "";
+
+  switch (typeof result.code) {
+    case "number":
+      return { code: result.code, stdout, stderr };
+    case "string":
+      return { code: -1, stdout, stderr: stderr || result.code };
+    default:
+      return { code: -1, stdout, stderr: stderr || String(result) };
   }
 };
 
