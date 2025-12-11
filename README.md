@@ -12,7 +12,7 @@ Model Context Protocol(MCP) server of Maxima.
 This software requires follows.
 
 - [Maxima](https://maxima.sourceforge.io/)
-- [Deno](https://deno.land/) 2.0.0 or later
+- [Deno](https://deno.land/) 2.0.0 or later (or Node.js 24 or later)
 
 ## Usage
 
