@@ -2,7 +2,6 @@
   "version": "5",
   "specifiers": {
     "npm:@modelcontextprotocol/sdk@^1.25.1": "1.25.1_zod@4.2.1_ajv@8.17.1_express@5.2.1",
-    "npm:vite@^7.2.7": "7.2.7_picomatch@4.0.3",
     "npm:vitest@^4.0.16": "4.0.16_vite@7.2.7__picomatch@4.0.3",
     "npm:zod@^4.2.1": "4.2.1"
   },
@@ -1035,7 +1034,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@modelcontextprotocol/sdk@^1.25.1",
-        "npm:vite@^7.2.7",
+        "npm:vite@^7.3.0",
         "npm:vitest@^4.0.16",
         "npm:zod@^4.2.1"
       ]
