@@ -1,10 +1,10 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@modelcontextprotocol/sdk@^1.25.1": "1.25.1_zod@4.2.1_ajv@8.17.1_express@5.2.1",
+    "npm:@modelcontextprotocol/sdk@^1.25.1": "1.25.1_zod@4.3.5_ajv@8.17.1_express@5.2.1",
     "npm:vite@^7.3.0": "7.3.0_picomatch@4.0.3",
     "npm:vitest@^4.0.16": "4.0.16_vite@7.3.0__picomatch@4.0.3",
-    "npm:zod@^4.2.1": "4.2.1"
+    "npm:zod@^4.3.5": "4.3.5"
   },
   "npm": {
     "@esbuild/aix-ppc64@0.27.1": {
@@ -146,7 +146,7 @@
     "@jridgewell/sourcemap-codec@1.5.5": {
       "integrity": "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="
     },
-    "@modelcontextprotocol/sdk@1.25.1_zod@4.2.1_ajv@8.17.1_express@5.2.1": {
+    "@modelcontextprotocol/sdk@1.25.1_zod@4.3.5_ajv@8.17.1_express@5.2.1": {
       "integrity": "sha512-yO28oVFFC7EBoiKdAn+VqRm+plcfv4v0xp6osG/VsCB0NlPZWi87ajbCZZ8f/RvOFLEu7//rSRmuZZ7lMoe3gQ==",
       "dependencies": [
         "@hono/node-server",
@@ -1021,14 +1021,14 @@
     "wrappy@1.0.2": {
       "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
     },
-    "zod-to-json-schema@3.25.0_zod@4.2.1": {
+    "zod-to-json-schema@3.25.0_zod@4.3.5": {
       "integrity": "sha512-HvWtU2UG41LALjajJrML6uQejQhNJx+JBO9IflpSja4R03iNWfKXrj6W2h7ljuLyc1nKS+9yDyL/9tD1U/yBnQ==",
       "dependencies": [
         "zod"
       ]
     },
-    "zod@4.2.1": {
-      "integrity": "sha512-0wZ1IRqGGhMP76gLqz8EyfBXKk0J2qo2+H3fi4mcUP/KtTocoX08nmIAHl1Z2kJIZbZee8KOpBCSNPRgauucjw=="
+    "zod@4.3.5": {
+      "integrity": "sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g=="
     }
   },
   "workspace": {
@@ -1037,7 +1037,7 @@
         "npm:@modelcontextprotocol/sdk@^1.25.1",
         "npm:vite@^7.3.0",
         "npm:vitest@^4.0.16",
-        "npm:zod@^4.2.1"
+        "npm:zod@^4.3.5"
       ]
     }
   }
