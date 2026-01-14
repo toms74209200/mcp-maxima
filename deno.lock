@@ -1,7 +1,7 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@modelcontextprotocol/sdk@^1.25.1": "1.25.1_zod@4.3.5_ajv@8.17.1_express@5.2.1",
+    "npm:@modelcontextprotocol/sdk@^1.25.2": "1.25.2_zod@4.3.5_ajv@8.17.1_express@5.2.1",
     "npm:vite@^7.3.0": "7.3.0_picomatch@4.0.3",
     "npm:vitest@^4.0.16": "4.0.16_vite@7.3.0__picomatch@4.0.3",
     "npm:zod@^4.3.5": "4.3.5"
@@ -137,8 +137,8 @@
       "os": ["win32"],
       "cpu": ["x64"]
     },
-    "@hono/node-server@1.19.7_hono@4.11.1": {
-      "integrity": "sha512-vUcD0uauS7EU2caukW8z5lJKtoGMokxNbJtBiwHgpqxEXokaHCBkQUmCHhjFB1VUTWdqj25QoMkMKzgjq+uhrw==",
+    "@hono/node-server@1.19.9_hono@4.11.4": {
+      "integrity": "sha512-vHL6w3ecZsky+8P5MD+eFfaGTyCeOHUIFYMGpQGbrBTSmNNoxv0if69rEZ5giu36weC5saFuznL411gRX7bJDw==",
       "dependencies": [
         "hono"
       ]
@@ -146,8 +146,8 @@
     "@jridgewell/sourcemap-codec@1.5.5": {
       "integrity": "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="
     },
-    "@modelcontextprotocol/sdk@1.25.1_zod@4.3.5_ajv@8.17.1_express@5.2.1": {
-      "integrity": "sha512-yO28oVFFC7EBoiKdAn+VqRm+plcfv4v0xp6osG/VsCB0NlPZWi87ajbCZZ8f/RvOFLEu7//rSRmuZZ7lMoe3gQ==",
+    "@modelcontextprotocol/sdk@1.25.2_zod@4.3.5_ajv@8.17.1_express@5.2.1": {
+      "integrity": "sha512-LZFeo4F9M5qOhC/Uc1aQSrBHxMrvxett+9KLHt7OhcExtoiRN9DKgbZffMP/nxjutWDQpfMDfP3nkHI4X9ijww==",
       "dependencies": [
         "@hono/node-server",
         "ajv",
@@ -375,8 +375,8 @@
     "assertion-error@2.0.1": {
       "integrity": "sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA=="
     },
-    "body-parser@2.2.1": {
-      "integrity": "sha512-nfDwkulwiZYQIGwxdy0RUmowMhKcFVcYXUU7m4QlKYim1rUtg83xm2yjZ40QjDuc291AJjjeSc9b++AWHSgSHw==",
+    "body-parser@2.2.2": {
+      "integrity": "sha512-oP5VkATKlNwcgvxi0vM0p/D3n2C3EReYVX+DNYs5TjZFn/oQt2j+4sVJtSMr18pdRr8wjTcBl6LoV+FUwzPmNA==",
       "dependencies": [
         "bytes",
         "content-type",
@@ -644,8 +644,8 @@
         "function-bind"
       ]
     },
-    "hono@4.11.1": {
-      "integrity": "sha512-KsFcH0xxHes0J4zaQgWbYwmz3UPOOskdqZmItstUG93+Wk1ePBLkLGwbP9zlmh1BFUiL8Qp+Xfu9P7feJWpGNg=="
+    "hono@4.11.4": {
+      "integrity": "sha512-U7tt8JsyrxSRKspfhtLET79pU8K+tInj5QZXs1jSugO1Vq5dFj3kmZsRldo29mTBfcjDRVRXrEZ6LS63Cog9ZA=="
     },
     "http-errors@2.0.1": {
       "integrity": "sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==",
@@ -657,8 +657,8 @@
         "toidentifier"
       ]
     },
-    "iconv-lite@0.7.1": {
-      "integrity": "sha512-2Tth85cXwGFHfvRgZWszZSvdo+0Xsqmw8k8ZwxScfcBneNUraK+dxRxRm24nszx80Y0TVio8kKLt5sLE7ZCLlw==",
+    "iconv-lite@0.7.2": {
+      "integrity": "sha512-im9DjEDQ55s9fL4EYzOAv0yMqmMBSZp6G0VvFyTMPKWxiSBHUj9NW/qqLmXUwXrrM7AvqSlTCfvqRb0cM8yYqw==",
       "dependencies": [
         "safer-buffer"
       ]
@@ -775,8 +775,8 @@
         "ipaddr.js"
       ]
     },
-    "qs@6.14.0": {
-      "integrity": "sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==",
+    "qs@6.14.1": {
+      "integrity": "sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==",
       "dependencies": [
         "side-channel"
       ]
@@ -1021,8 +1021,8 @@
     "wrappy@1.0.2": {
       "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
     },
-    "zod-to-json-schema@3.25.0_zod@4.3.5": {
-      "integrity": "sha512-HvWtU2UG41LALjajJrML6uQejQhNJx+JBO9IflpSja4R03iNWfKXrj6W2h7ljuLyc1nKS+9yDyL/9tD1U/yBnQ==",
+    "zod-to-json-schema@3.25.1_zod@4.3.5": {
+      "integrity": "sha512-pM/SU9d3YAggzi6MtR4h7ruuQlqKtad8e9S0fmxcMi+ueAK5Korys/aWcV9LIIHTVbj01NdzxcnXSN+O74ZIVA==",
       "dependencies": [
         "zod"
       ]
@@ -1034,7 +1034,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@modelcontextprotocol/sdk@^1.25.1",
+        "npm:@modelcontextprotocol/sdk@^1.25.2",
         "npm:vite@^7.3.0",
         "npm:vitest@^4.0.16",
         "npm:zod@^4.3.5"
