@@ -3,6 +3,7 @@
     "description": "Model Context Protocol(MCP) server of Maxima",
     "version": "1.0.2",
     "license": "MIT",
+    "nodeModulesDir": "auto",
     "exports": {
         ".": "./main.ts"
     },
