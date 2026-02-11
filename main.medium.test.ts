@@ -77,6 +77,158 @@ test(
 );
 
 test(
+  "when passing command with trailing semicolon then returns correct result",
+  async () => {
+    const command = new Deno.Command("deno", {
+      args: ["run", "-A", "--no-check", `${Deno.cwd()}/main.ts`],
+      stdin: "piped",
+      stdout: "piped",
+      stderr: "piped",
+    });
+    const child = command.spawn();
+
+    const writer = child.stdin.getWriter();
+    const reader = child.stdout.pipeThrough(new TextDecoderStream())
+      .getReader();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "init-1",
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-03-26",
+          capabilities: {},
+          clientInfo: { name: "test-client-stdio", version: "0.0.1" },
+        },
+      }) + "\n",
+    ));
+
+    const readLines = async () => {
+      const line = await reader.read();
+      if (line.done) {
+        return;
+      }
+      try {
+        return JSON.parse(line.value);
+      } catch {
+        return await readLines();
+      }
+    };
+
+    await readLines();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        method: "initialized",
+        params: {},
+      }) + "\n",
+    ));
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "call-1",
+        method: "tools/call",
+        params: {
+          name: "execute-maxima",
+          arguments: { command: "diff(sin(x), x);" },
+        },
+      }) + "\n",
+    ));
+
+    const actual = await readLines();
+
+    expect(actual.result.content).toStrictEqual([{
+      type: "text",
+      text: "cos(x)",
+    }]);
+
+    await writer.close();
+    child.kill("SIGTERM");
+    await child.status;
+  },
+  1000,
+);
+
+test(
+  "when passing command with multiple trailing semicolons then returns correct result",
+  async () => {
+    const command = new Deno.Command("deno", {
+      args: ["run", "-A", "--no-check", `${Deno.cwd()}/main.ts`],
+      stdin: "piped",
+      stdout: "piped",
+      stderr: "piped",
+    });
+    const child = command.spawn();
+
+    const writer = child.stdin.getWriter();
+    const reader = child.stdout.pipeThrough(new TextDecoderStream())
+      .getReader();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "init-1",
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-03-26",
+          capabilities: {},
+          clientInfo: { name: "test-client-stdio", version: "0.0.1" },
+        },
+      }) + "\n",
+    ));
+
+    const readLines = async () => {
+      const line = await reader.read();
+      if (line.done) {
+        return;
+      }
+      try {
+        return JSON.parse(line.value);
+      } catch {
+        return await readLines();
+      }
+    };
+
+    await readLines();
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        method: "initialized",
+        params: {},
+      }) + "\n",
+    ));
+
+    await writer.write(new TextEncoder().encode(
+      JSON.stringify({
+        jsonrpc: "2.0",
+        id: "call-1",
+        method: "tools/call",
+        params: {
+          name: "execute-maxima",
+          arguments: { command: "diff(sin(x), x);;" },
+        },
+      }) + "\n",
+    ));
+
+    const actual = await readLines();
+
+    expect(actual.result.content).toStrictEqual([{
+      type: "text",
+      text: "cos(x)",
+    }]);
+
+    await writer.close();
+    child.kill("SIGTERM");
+    await child.status;
+  },
+  1000,
+);
+
+test(
   "when calling random command twice then returns different numbers",
   async () => {
     const command = new Deno.Command("deno", {
