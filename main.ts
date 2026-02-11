@@ -71,8 +71,9 @@ async function runMaximaCommand(command: string): Promise<string> {
     Math.ceil(Math.random() * 65535)
   })`;
   const randomSeedSetting = `set_random_state(s)`;
+  const sanitizedCommand = command.replace(/[;$\s]+$/, "");
   const batchString =
-    `${displaySetting}$ ${randomStateSetting}$ ${randomSeedSetting}$ ${command};`;
+    `${displaySetting}$ ${randomStateSetting}$ ${randomSeedSetting}$ ${sanitizedCommand};`;
 
   const { code, stdout, stderr } = await Promise.any(
     executors.map((exec) =>
@@ -98,7 +99,7 @@ async function runMaximaCommand(command: string): Promise<string> {
     .replace(displaySetting.replace(" ", ""), "")
     .replace(randomStateSetting.replace(" ", ""), "")
     .replace(randomSeedSetting.replace(" ", ""), "")
-    .replace(command.replace(" ", ""), "")
+    .replace(sanitizedCommand.replace(" ", ""), "")
     .trim();
 }
 
