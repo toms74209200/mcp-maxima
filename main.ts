@@ -1,14 +1,7 @@
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
 import { execFile } from "node:child_process";
+import { createInterface } from "node:readline";
 import { promisify } from "node:util";
 import process from "node:process";
-
-const server = new McpServer({
-  name: "Maxima-MCP-Server",
-  version: "0.1.0",
-});
 
 const createDenoExecutor = async (
   command: string,
@@ -103,48 +96,127 @@ async function runMaximaCommand(command: string): Promise<string> {
     .trim();
 }
 
-server.registerTool(
-  "execute-maxima",
-  {
-    description: "Execute a Maxima command for symbolic mathematics",
-    inputSchema: {
-      command: z.string().describe(
-        "The Maxima command to execute (e.g., 'diff(sin(x), x)')",
-      ),
-    },
-  },
-  async ({ command }) => {
-    try {
-      const result = await runMaximaCommand(command);
-      if (result.includes("incorrect syntax")) {
+type McpRequest =
+  | { type: "initialize"; id: string | number }
+  | { type: "tools/list"; id: string | number }
+  | { type: "execute-maxima"; id: string | number; command: string }
+  | { type: "unknown-tool"; id: string | number; toolName: string }
+  | { type: "invalid-params"; id: string | number; error: string };
+
+function parseMcpRequest(
+  msg: Record<string, unknown>,
+): McpRequest | null {
+  if (!("id" in msg)) return null;
+  const id = msg.id as string | number;
+
+  switch (msg.method) {
+    case "initialize":
+      return { type: "initialize", id };
+    case "tools/list":
+      return { type: "tools/list", id };
+    case "tools/call": {
+      const params = msg.params as Record<string, unknown> | undefined;
+      const toolName = params?.name as string | undefined;
+      if (toolName !== "execute-maxima") {
+        return { type: "unknown-tool", id, toolName: toolName ?? "" };
+      }
+      const command = (params?.arguments as Record<string, unknown> | undefined)
+        ?.command;
+      if (typeof command !== "string") {
         return {
-          content: [{
-            type: "text",
-            text: result,
-          }],
-          isError: true,
+          type: "invalid-params",
+          id,
+          error: "command must be a string",
         };
       }
-      return {
-        content: [{ type: "text", text: result }],
-      };
-    } catch (e: unknown) {
-      let errorMessage = "An unknown error occurred";
-      if (e instanceof Error) {
-        errorMessage = e.message;
+      return { type: "execute-maxima", id, command };
+    }
+    default:
+      return null;
+  }
+}
+
+function sendResult(id: string | number, result: unknown): void {
+  process.stdout.write(JSON.stringify({ jsonrpc: "2.0", id, result }) + "\n");
+}
+
+function sendError(id: string | number, code: number, message: string): void {
+  process.stdout.write(
+    JSON.stringify({ jsonrpc: "2.0", id, error: { code, message } }) + "\n",
+  );
+}
+
+const readline = createInterface({ input: process.stdin });
+readline.on("line", async (line) => {
+  const trimmed = line.trim();
+  if (!trimmed) return;
+  let msg: Record<string, unknown>;
+  try {
+    msg = JSON.parse(trimmed);
+  } catch {
+    return;
+  }
+
+  const request = parseMcpRequest(msg);
+  if (!request) return;
+
+  switch (request.type) {
+    case "initialize":
+      sendResult(request.id, {
+        protocolVersion: "2025-03-26",
+        capabilities: { tools: {} },
+        serverInfo: { name: "Maxima-MCP-Server", version: "1.1.0" },
+      });
+      break;
+    case "tools/list":
+      sendResult(request.id, {
+        tools: [{
+          name: "execute-maxima",
+          description: "Execute a Maxima command for symbolic mathematics",
+          inputSchema: {
+            type: "object",
+            properties: {
+              command: {
+                type: "string",
+                description:
+                  "The Maxima command to execute (e.g., 'diff(sin(x), x)')",
+              },
+            },
+            required: ["command"],
+          },
+        }],
+      });
+      break;
+    case "execute-maxima":
+      try {
+        const result = await runMaximaCommand(request.command);
+        sendResult(request.id, {
+          content: [{ type: "text", text: result }],
+          isError: result.includes("incorrect syntax"),
+        });
+      } catch (e: unknown) {
+        sendResult(request.id, {
+          content: [{
+            type: "text",
+            text: `Error executing Maxima command: ${
+              e instanceof Error ? e.message : "An unknown error occurred"
+            }`,
+          }],
+          isError: true,
+        });
       }
-      return {
+      break;
+    case "unknown-tool":
+      sendResult(request.id, {
         content: [{
           type: "text",
-          text: `Error executing Maxima command: ${errorMessage}`,
+          text: `MCP error -32602: Unknown tool: ${request.toolName}`,
         }],
         isError: true,
-      };
-    }
-  },
-);
-
-const transport = new StdioServerTransport();
-server.connect(transport).catch((err) => {
-  console.error("Failed to connect Maxima MCP server:", err);
+      });
+      break;
+    case "invalid-params":
+      sendError(request.id, -32602, `Invalid params: ${request.error}`);
+      break;
+  }
 });
